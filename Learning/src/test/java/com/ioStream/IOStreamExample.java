@@ -3,7 +3,6 @@ package com.ioStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.ResourceUtils;
 
-import javax.annotation.processing.Filer;
 import java.io.*;
 
 public class IOStreamExample {
@@ -76,6 +75,24 @@ public class IOStreamExample {
             }
         }finally {
             in.close();
+        }
+    }
+
+    @Test
+    public void readInputFromConsoleTest() throws IOException{
+        InputStreamReader cin = null;
+        try {
+            cin = new InputStreamReader(System.in);
+            System.out.println("Enter, q to quit.");
+            char c;
+            do {
+                c = (char)cin.read();
+                System.out.print(c);
+            }while (c!='q');
+        }finally {
+            if(cin!=null){
+                cin.close();
+            }
         }
     }
 }
