@@ -2,7 +2,11 @@ package com.streams;
 
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.sql.SQLOutput;
 import java.util.*;
@@ -12,7 +16,12 @@ import java.util.stream.Stream;
 
 public class StreamsExample {
 
-    public static List<Student> students = StudentDataBase.getAllStudents();
+    public static List<Student> students = null;
+
+    @BeforeAll
+    static void setUp(){
+        students = StudentDataBase.getAllStudents();
+    }
 
     @Test
     public void mapTest(){
