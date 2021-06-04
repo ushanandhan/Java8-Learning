@@ -2,6 +2,7 @@ package com.lambdas.functionalInterfaces;
 
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -9,14 +10,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 
 public class BiFunctionExample {
 
+    static List<Student> students = null;
+
+    @BeforeAll
+    public static void setUp(){
+        students = StudentDataBase.getAllStudents();
+    }
+
     @Test
     public void biFunctionTest(){
-        List<Student> students = StudentDataBase.getAllStudents();
-
         BiPredicate<Integer,Double> studentPredicate = (gradeLevel, gpa)->gradeLevel>=3 && gpa>=3.9;
 
         BiFunction<List<Student>,BiPredicate<Integer,Double>, Map<String,Double>> biFunction = (studentList,predicate) -> {

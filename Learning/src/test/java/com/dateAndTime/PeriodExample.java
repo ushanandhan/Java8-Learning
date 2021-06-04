@@ -2,6 +2,7 @@ package com.dateAndTime;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -30,5 +31,22 @@ public class PeriodExample {
 
         Period period3 = Period.between(localDate, localDate1);
         System.out.println("Period : " +period3.getDays()+" : " +period3.getMonths()+" : "+period3.getYears());
+    }
+
+    @Test
+    public void findDayOfGivenDate(){
+        LocalDate localDate = LocalDate.now();
+        System.out.println(findPreviousDate(localDate));
+        LocalDate localDate1 = localDate.minusDays(1);
+        System.out.println(findPreviousDate(localDate1));
+    }
+
+    public LocalDate findPreviousDate(LocalDate date){
+         DayOfWeek dayOfWeek = date.getDayOfWeek();
+        if(dayOfWeek.equals(DayOfWeek.MONDAY)){
+            return date.minusDays(2);
+        }else{
+            return date.minusDays(1);
+        }
     }
 }

@@ -2,12 +2,20 @@ package com.lambdas.functionalInterfaces;
 
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
 public class BiConsumerExample {
+
+    static List<Student> students = null;
+
+    @BeforeAll
+    public static void setUp(){
+        students = StudentDataBase.getAllStudents();
+    }
 
     @Test
     public void biConsumerTest(){
@@ -26,8 +34,6 @@ public class BiConsumerExample {
     @Test
     public void biConsumerWithObjectTest(){
         BiConsumer<String, List<String>> biConsumer = (name,activities)-> System.out.println(name+": "+activities);
-
-        List<Student> students = StudentDataBase.getAllStudents();
         students.forEach(student -> biConsumer.accept(student.getName(),student.getActivities()));
     }
 }

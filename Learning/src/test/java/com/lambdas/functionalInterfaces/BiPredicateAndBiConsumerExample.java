@@ -2,6 +2,7 @@ package com.lambdas.functionalInterfaces;
 
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,6 +10,13 @@ import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
 
 public class BiPredicateAndBiConsumerExample {
+
+    static List<Student> students = null;
+
+    @BeforeAll
+    public static void setUp(){
+        students = StudentDataBase.getAllStudents();
+    }
 
     @Test
     public void biPredicateTest(){

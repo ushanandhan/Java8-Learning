@@ -2,6 +2,7 @@ package com.streams;
 
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -12,8 +13,12 @@ import static java.util.stream.Collectors.*;
 
 public class TerminalOperatorsExample {
 
-    public static List<Student> students = StudentDataBase.getAllStudents();
+    public static List<Student> students = null;
 
+    @BeforeAll
+    static void setUp(){
+        students = StudentDataBase.getAllStudents();
+    }
     @Test
     public void collect_joiningTest(){
         String join1 = students.stream()
@@ -114,6 +119,9 @@ public class TerminalOperatorsExample {
                                 Optional::get)));
         System.out.println("maxBy example without optional");
         System.out.println(maxStudent);
+
+        Map<Integer, Map<String, List<Student>>> twoGroupBy = students.stream().collect(groupingBy(Student::getGradeLevel, groupingBy(Student::getGender)));
+        System.out.println("Latest : "+twoGroupBy);
     }
 
     @Test
