@@ -1,5 +1,6 @@
 package com.dateAndTime;
 
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -39,6 +40,12 @@ public class DurationExample {
 
         System.out.println(duration3.toDays());
 
+
+    }
+
+    @Test
+    @Ignore
+    public void this_test_will_not_work(){
         /**
          * LocalDate - not supported
          */
