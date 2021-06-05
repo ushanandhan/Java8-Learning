@@ -3,6 +3,8 @@ package com.optional;
 import com.basics.data.Bike;
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,11 +12,16 @@ import java.util.Optional;
 
 public class OptionalExample {
 
-    static Student student = StudentDataBase.studentSupplier.get();
+    static Student student = null;
+
+    @BeforeAll
+    public static void setUp(){
+        student = StudentDataBase.studentSupplier.get();
+    }
 
     @Test
     public void of_ofNullable_emptyTest(){
-        Optional<Student> studentOptional = Optional.ofNullable(StudentDataBase.studentSupplier.get());
+        Optional<Student> studentOptional = Optional.ofNullable(student);
         if(studentOptional.isPresent()){
             System.out.println(studentOptional.get());
         }else{
@@ -28,10 +35,13 @@ public class OptionalExample {
         Optional<Student> optionalStudentEmpty = Optional.ofNullable(null);
         String name = optionalStudent.map(Student::getName).orElse("Default");
         String name2 = optionalStudentEmpty.map(Student::getName).orElse("Default");
-        String exception = optionalStudentEmpty.map(Student::getName).orElseThrow(() -> new RuntimeException("Not Available"));
+        try {
+            String exception = optionalStudentEmpty.map(Student::getName).orElseThrow(() -> new RuntimeException("Not Available"));
+        }catch (RuntimeException exception){
+            System.out.println("Optional Or Else Throw : "+exception);
+        }
         System.out.println("Optional Or Else : "+name);
         System.out.println("Optional Or Else default call : "+name2);
-        System.out.println("Optional Or Else Throw : "+exception);
     }
 
     @Test
