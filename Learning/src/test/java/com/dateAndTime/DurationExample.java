@@ -53,7 +53,7 @@ public class DurationExample {
         LocalDate localDate = LocalDate.now();
         LocalDate localDate1 = LocalDate.of(2018, 8,13);
 
-        Duration duration4 = Duration.between(localDate,localDate1);
+        Duration duration4 = Duration.between(localDate1,localDate);
         System.out.println(duration4.toDays());
     }
 }
