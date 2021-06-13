@@ -2,10 +2,8 @@ package com.concurency;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Random;
+import java.util.concurrent.*;
 
 public class ExecuterServiceTest {
 
@@ -57,6 +55,31 @@ public class ExecuterServiceTest {
 //        task to run repeatedly 10 seconds after previous task completes
         service.scheduleWithFixedDelay(() -> System.out.println("Task 3 running"),15,10,TimeUnit.SECONDS);
 
+        System.out.println("Thread Name: "+ Thread.currentThread().getName());
+    }
+
+    @Test
+    public void callableInterface() throws InterruptedException, ExecutionException {
+//        Create the Thread pool
+        ExecutorService service = Executors.newFixedThreadPool(10);
+//        submit the tasks for execution
+
+        Future<Integer> futureValue = service.submit(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return new Random().nextInt();
+        });
+
+//        Unrelated previous task operations
+        for(int i=0;i<2;i++){
+            Thread.sleep(1000);
+            System.out.println("Count is : "+i);
+        }
+
+        System.out.println("Future value is : "+futureValue.get());
         System.out.println("Thread Name: "+ Thread.currentThread().getName());
     }
 }

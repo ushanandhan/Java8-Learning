@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class NumericStreamExample {
 
@@ -24,6 +25,18 @@ public class NumericStreamExample {
                 .mapToObj(value -> new Integer(value))
                 .collect(Collectors.toList());
 
+        List<int[]> collect1 = Stream.of("A", "B", "C")
+                .map(s -> {
+                    if (s.equals("A")) {
+                        return new int[]{1};
+                    } else if (s.equals("B")) {
+                        return new int[]{2};
+                    } else {
+                        return new int[]{3};
+                    }
+                })
+                .collect(Collectors.toList());
         System.out.println(collect);
+        System.out.println(collect1);
     }
 }
