@@ -34,7 +34,7 @@ public class ReferenceExample {
         /**
          * ClassName::MethodName
          */
-        Consumer<Student> studentConsumer1 = Student::getName;
+        Consumer<Student> studentConsumer1 = Student::getGender;
 
         List<Student> students = StudentDataBase.getAllStudents();
         students.forEach(studentConsumer.andThen(studentConsumer1));

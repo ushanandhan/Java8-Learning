@@ -14,13 +14,14 @@ public class CompletableFutureTest {
         System.out.println("Main Thread is : "+Thread.currentThread().getName());
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
-                TimeUnit.SECONDS.sleep(1);
+                TimeUnit.SECONDS.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println("I'll run in a  separate thread then main thread : "+Thread.currentThread().getName());
         });
         future.get();
+        System.out.println("processed in : "+Thread.currentThread().getName());
     }
 
     @Test
@@ -36,7 +37,7 @@ public class CompletableFutureTest {
             }
             return "Result of the async computation";
         },executor);
-
+        System.out.println("Printing this because it is async");
         System.out.println(future.get());
         System.out.println("Processing");
     }

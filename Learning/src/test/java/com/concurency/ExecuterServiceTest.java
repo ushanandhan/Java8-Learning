@@ -22,6 +22,7 @@ public class ExecuterServiceTest {
     public void ThreadPoolPick() {
 //        Create the Thread pool
         int coreCount = Runtime.getRuntime().availableProcessors();
+        System.out.println("Core count is : "+coreCount);
         ExecutorService service = Executors.newFixedThreadPool(coreCount);
 //        submit the tasks for execution
         for(int i =0;i<100;i++){
@@ -42,7 +43,7 @@ public class ExecuterServiceTest {
     }
 
     @Test
-    public void scheduledThreadPool(){
+    public void scheduledThreadPool() throws InterruptedException {
 //        for scheduling of task
         ScheduledExecutorService service = Executors.newScheduledThreadPool(10);
 
@@ -56,6 +57,7 @@ public class ExecuterServiceTest {
         service.scheduleWithFixedDelay(() -> System.out.println("Task 3 running"),15,10,TimeUnit.SECONDS);
 
         System.out.println("Thread Name: "+ Thread.currentThread().getName());
+        Thread.sleep(20000);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.streams;
 
 import com.basics.data.Student;
+
 import com.basics.data.StudentDataBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -82,42 +83,42 @@ public class TerminalOperatorsExample {
 
         Map<String, List<Student>> genderStudentMap = students.stream()
                 .collect(groupingBy(Student::getGender));
-        System.out.println("One Argument joiningBy");
+        System.out.println("************* One Argument groupingBy **************");
         System.out.println("List of students by Gender : "+genderStudentMap); //Used only one argument in groupingBy
 
         Map<String, List<Student>> studentStatusMap = students.stream()
                 .collect(groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE")); //Used one argument customized function
-        System.out.println("One Argument joiningBy with customized function");
+        System.out.println("************* One Argument groupingBy with customized function ************* ");
         System.out.println("List of students by customized status : "+studentStatusMap);
 
         Map<Integer, Map<String, List<Student>>> studentMap = students.stream()
                 .collect(groupingBy(Student::getGradeLevel,
                         groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE")));
-        System.out.println("two Argument joiningBy");
+        System.out.println("************* two Argument groupingBy ************* ");
         System.out.println(studentMap);
 
         Map<String, Integer> studentNoteBookMap = students.stream()
                 .collect(groupingBy(Student::getName,
                         summingInt(Student::getNoteBooks)));
-        System.out.println("two Argument joiningBy");
+        System.out.println("************* two Argument groupingBy ************* ");
         System.out.println(studentNoteBookMap);
 
         LinkedHashMap<String, Set<Student>> studentLinkedHasMap = students.stream()
                 .collect(groupingBy(Student::getName, LinkedHashMap::new, toSet()));
-        System.out.println("three Argument joiningBy");
+        System.out.println("************* three Argument groupingBy ************* ");
         System.out.println(studentLinkedHasMap);
 
         Map<Integer, Optional<Student>> maxStudentOptional = students.stream()
                 .collect(groupingBy(Student::getGradeLevel,
                         maxBy(Comparator.comparing(Student::getGpa))));
-        System.out.println("maxBy example");
+        System.out.println("************* maxBy example ************* ");
         System.out.println(maxStudentOptional);
 
         Map<Integer,Student> maxStudent = students.stream()
                 .collect(groupingBy(Student::getGradeLevel,
                         collectingAndThen(maxBy(Comparator.comparing(Student::getGpa)),
                                 Optional::get)));
-        System.out.println("maxBy example without optional");
+        System.out.println("************* maxBy example without optional ************* ");
         System.out.println(maxStudent);
 
         Map<Integer, Map<String, List<Student>>> twoGroupBy = students.stream().collect(groupingBy(Student::getGradeLevel, groupingBy(Student::getGender)));
