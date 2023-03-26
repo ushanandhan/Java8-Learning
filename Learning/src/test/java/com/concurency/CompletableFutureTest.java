@@ -2,10 +2,10 @@ package com.concurency;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CompletableFutureTest {
 
@@ -63,11 +63,39 @@ public class CompletableFutureTest {
 
     @Test
     public void joiningMultipleThreads(){
-        List<Integer> integers = Stream.iterate(1, integer -> integer+1)
-                .limit(100)
-                .collect(Collectors.toList());
-        System.out.println(integers);
+        List<CompletableFuture<String>> completableFutures = new ArrayList<>();
 
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Ushan";
+        });
+        completableFutures.add(future1);
 
+        CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Ariya";
+        });
+        completableFutures.add(future2);
+
+        CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Varadhan";
+        });
+        completableFutures.add(future3);
+
+        String collect = completableFutures.stream().map(CompletableFuture::join).collect(Collectors.joining("-"));
+        System.out.println(collect);
     }
 }

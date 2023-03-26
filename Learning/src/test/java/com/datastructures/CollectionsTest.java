@@ -43,7 +43,12 @@ public class CollectionsTest {
         list.display();
         System.out.println();
         list.insertAtPosition(2,1);
-        list.insertAtPosition(5,9);
+        list.insertAtPosition(3,9);
         list.display();
+        System.out.println();
+        list.deleteAtPosition(2);
+        list.display();
+        System.out.println();
+        System.out.println(list.get(0));
     }
 }
