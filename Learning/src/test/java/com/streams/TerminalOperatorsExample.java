@@ -1,14 +1,12 @@
 package com.streams;
 
 import com.basics.data.Student;
-
 import com.basics.data.StudentDataBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 

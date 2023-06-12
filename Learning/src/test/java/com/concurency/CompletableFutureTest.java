@@ -18,7 +18,7 @@ public class CompletableFutureTest {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("I'll run in a  separate thread then main thread : "+Thread.currentThread().getName());
+            System.out.println("I'll run in a  separate thread than main thread : "+Thread.currentThread().getName());
         });
         future.get();
         System.out.println("processed in : "+Thread.currentThread().getName());
@@ -30,6 +30,7 @@ public class CompletableFutureTest {
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             try {
                 for (int i = 0;i<10;i++){
+                    System.out.println("processed in : "+Thread.currentThread().getName());
                     TimeUnit.SECONDS.sleep(1);
                 }
             } catch (InterruptedException e) {
@@ -54,15 +55,13 @@ public class CompletableFutureTest {
             return "Ushan";
         });
 //        Attach a callback to the Future using thenApply()
-        CompletableFuture<String> greetingFuture = whatsYourNameFuture.thenApply(name -> {
-            return "Hello "+name;
-        });
+        CompletableFuture<String> greetingFuture = whatsYourNameFuture.thenApply(name -> "Hello "+name);
 
         System.out.println(greetingFuture.get());
     }
 
     @Test
-    public void joiningMultipleThreads(){
+    public void joiningMultipleThreads() throws ExecutionException, InterruptedException {
         List<CompletableFuture<String>> completableFutures = new ArrayList<>();
 
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
@@ -93,9 +92,10 @@ public class CompletableFutureTest {
             }
             return "Varadhan";
         });
-        completableFutures.add(future3);
 
+        String join = future3.get();
         String collect = completableFutures.stream().map(CompletableFuture::join).collect(Collectors.joining("-"));
-        System.out.println(collect);
+        System.out.println("Collectivly future result : "+collect);
+        System.out.println("Single Completable future result : "+join);
     }
 }
