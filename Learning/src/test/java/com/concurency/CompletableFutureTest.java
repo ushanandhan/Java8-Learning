@@ -98,4 +98,34 @@ public class CompletableFutureTest {
         System.out.println("Collectivly future result : "+collect);
         System.out.println("Single Completable future result : "+join);
     }
+
+    public static int compute(int a){
+        return a*10;
+    }
+
+    @Test
+    public void TwoIndependentCompletableFutureUsingCombineTest(){
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> compute(1));
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> compute(2));
+
+        future1.thenCombine(future2, Integer::sum).thenAccept(System.out::println);
+}
+
+    @Test
+    public void TwoDependentCompletableFutureUsingComposeTest() {
+//        Using thenApply we would get only wrapped Completable Future result.
+        CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> compute(1));
+        CompletableFuture<CompletableFuture<Integer>> completableFutureUsingApply = future1.thenApply(a -> CompletableFuture.supplyAsync(() -> compute(a + 2)));
+        completableFutureUsingApply.thenAccept(System.out::println);
+//        Using thenCompose we would get exact value from Future result.
+        CompletableFuture<Integer> future2 = CompletableFuture.supplyAsync(() -> compute(2));
+        CompletableFuture<Integer> completableFutureUsingCompose = future2.thenCompose(a -> CompletableFuture.supplyAsync(() -> compute(a + 2)));
+        completableFutureUsingCompose.thenAccept(System.out::println);
+    }
+
+    @Test
+    public void WithExceptionally(){
+
+    }
+
 }

@@ -57,11 +57,11 @@ public class TerminalOperatorsExample {
     @Test
     public void collect_minBy_maxByTest(){
         Optional<Student> minBy = students.stream()
-                .collect(minBy(Comparator.comparing(Student::getGpa)));
+                .min(Comparator.comparing(Student::getGpa));
         System.out.println("MinBy Student : "+minBy.get());
 
         Optional<Student> maxBy = students.stream()
-                .collect(maxBy(Comparator.comparing(Student::getGpa)));
+                .max(Comparator.comparing(Student::getGpa));
         System.out.println("MaxBy Student : "+maxBy.get());
     }
 
