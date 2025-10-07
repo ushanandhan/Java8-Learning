@@ -40,7 +40,7 @@ public class FunctionalInterface {
         thread.start();
 
 //      Comparator interface implementation
-        Comparator<Integer> comparator= (o1,o2)->o1.compareTo(o2);
+        Comparator<Integer> comparator= Integer::compareTo;
         System.out.println("Compare status is : "+comparator.compare(3,2));
 
     }

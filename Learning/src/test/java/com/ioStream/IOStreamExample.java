@@ -69,7 +69,7 @@ public class IOStreamExample {
         FileReader in = null;
         try {
             in = new FileReader("../Learning/src/main/resources/iostream/char/output.txt");
-            int i = 0;
+            int i;
             while((i=in.read())!=-1){
                 System.out.print((char)i);
             }
@@ -80,19 +80,19 @@ public class IOStreamExample {
 
     @Test
     public void readInputFromConsoleTest() throws IOException{
-        InputStreamReader cin = null;
-        try {
-            cin = new InputStreamReader(System.in);
-            System.out.println("Enter, q to quit.");
-            char c;
-            do {
-                c = (char)cin.read();
-                System.out.print(c);
-            }while (c!='q');
-        }finally {
-            if(cin!=null){
-                cin.close();
-            }
-        }
+//        InputStreamReader cin = null;
+//        try {
+//            cin = new InputStreamReader(System.in);
+//            System.out.println("Enter, q to quit.");
+//            char c;
+//            do {
+//                c = (char)cin.read();
+//                System.out.print(c);
+//            }while (c!='q');
+//        }finally {
+//            if(cin!=null){
+//                cin.close();
+//            }
+//        }
     }
 }

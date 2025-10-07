@@ -1,18 +1,11 @@
 package com.junit5;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 public class Junit5Test {
 
@@ -67,9 +60,9 @@ public class Junit5Test {
     }
 
     @Test
+    @Timeout(value = 1, unit = TimeUnit.SECONDS)
     public void timeoutTest1(){
-        int sum = assertTimeout(Duration.ofMillis(1000),()->sum(1,2));
-        assertEquals(3,sum);
+        sum(1,2);
     }
 
     public int sum(int a,int b){

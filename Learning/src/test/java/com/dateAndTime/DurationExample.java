@@ -1,12 +1,12 @@
 package com.dateAndTime;
 
-import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class DurationExample {
@@ -34,17 +34,23 @@ public class DurationExample {
          * LocalDateTime
          */
         LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime.getSecond());
         LocalDateTime localDateTime1 = LocalDateTime.of(2018,8,13,23,59);
 
         Duration duration3 = Duration.between(localDateTime,localDateTime1);
 
         System.out.println(duration3.toDays());
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String currentTime= "2017-10-19 22:00:00";
+        LocalDateTime datetime = LocalDateTime.parse(currentTime,formatter);
+        //2017-10-19T22:00
+        String formattedDate=datetime.format(formatter);
+
 
     }
 
-    @Test
-    @Ignore
+//    @Test
     public void this_test_will_not_work(){
         /**
          * LocalDate - not supported

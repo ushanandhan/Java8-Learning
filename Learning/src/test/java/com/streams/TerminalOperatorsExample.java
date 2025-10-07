@@ -2,10 +2,12 @@ package com.streams;
 
 import com.basics.data.Student;
 import com.basics.data.StudentDataBase;
+import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.*;
@@ -95,6 +97,11 @@ public class TerminalOperatorsExample {
         System.out.println("************* two Argument groupingBy ************* ");
         System.out.println(studentMap);
 
+        Map<Integer, Map<String, Student>> studentGradeLevelGpaMap = students.stream()
+                .collect(groupingBy(Student::getGradeLevel, toMap(Student::getName, Function.identity())));
+        System.out.println("************* two Argument groupingBy with toMap ************* ");
+        System.out.println(studentGradeLevelGpaMap);
+
         Map<String, Integer> studentNoteBookMap = students.stream()
                 .collect(groupingBy(Student::getName,
                         summingInt(Student::getNoteBooks)));
@@ -105,6 +112,12 @@ public class TerminalOperatorsExample {
                 .collect(groupingBy(Student::getName, LinkedHashMap::new, toSet()));
         System.out.println("************* three Argument groupingBy ************* ");
         System.out.println(studentLinkedHasMap);
+
+        Map<MultiKey, List<Student>> studentMultiKey = students.stream()
+                .collect(groupingBy(student -> new MultiKey(student.getName(), student.getGpa(), student.getGender())));
+        System.out.println("************* Multi Key Group by ********************");
+        System.out.println(studentMultiKey);
+        System.out.println(studentMultiKey.get(new MultiKey("Dave",4.0,"male")).toString());
 
         Map<Integer, Optional<Student>> maxStudentOptional = students.stream()
                 .collect(groupingBy(Student::getGradeLevel,

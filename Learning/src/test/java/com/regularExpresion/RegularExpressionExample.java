@@ -23,6 +23,7 @@ public class RegularExpressionExample {
         System.out.println("7. "+Pattern.matches("[xyz]*","xyyza"));
         System.out.println("8. "+Pattern.matches("\\d","1"));
         System.out.println("9. "+Pattern.matches("\\D","D"));
+        System.out.println("10. "+Pattern.matches("\\bcom.ushan.Exception","com.ushan.Exception"));
     }
 
 }

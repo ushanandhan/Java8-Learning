@@ -145,4 +145,13 @@ public class StreamsExample {
                 .limit(5)
                 .forEach(System.out::println);
     }
+
+    @Test
+    public void fibanocci_series_with_iterate(){
+        int limit = 10; // Number of Fibonacci numbers to generate
+        Stream.iterate(new int[]{0, 1}, f -> new int[]{f[1], f[0] + f[1]})
+                .limit(limit)
+                .map(n -> n[0])
+                .forEach(System.out::println);
+    }
 }
