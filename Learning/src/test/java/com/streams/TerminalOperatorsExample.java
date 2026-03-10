@@ -86,6 +86,11 @@ public class TerminalOperatorsExample {
         System.out.println("************* One Argument groupingBy **************");
         System.out.println("List of students by Gender : "+genderStudentMap); //Used only one argument in groupingBy
 
+        Map<String, List<Student>> genderGpaStudentMap = students.stream()
+                .collect(groupingBy(p -> p.getGender()+ " "+p.getGpa()));
+        System.out.println("************* One Argument groupingBy with multiple class fields **************");
+        System.out.println("List of students by Gender GPA Map: "+genderGpaStudentMap);
+
         Map<String, List<Student>> studentStatusMap = students.stream()
                 .collect(groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE")); //Used one argument customized function
         System.out.println("************* One Argument groupingBy with customized function ************* ");
